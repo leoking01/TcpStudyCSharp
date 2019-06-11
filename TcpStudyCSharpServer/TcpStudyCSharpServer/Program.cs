@@ -45,16 +45,16 @@ namespace TcpStudyCSharpServer
             //p.printVideoAddress(p.videoAddress(path));
 
             Console.WriteLine("[1]server start. "  );
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket sktServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ipEnd = new IPEndPoint(IPAddress.Any, 8888);
             Console.WriteLine("ipEnd.Address.ToString() = " + ipEnd.Address.ToString());
-            socket.Bind(ipEnd);
-            socket.Listen(10);
+            sktServer.Bind(ipEnd);
+            sktServer.Listen(10);
             Console.WriteLine("[1]server 启动成功. ");
 
 
             Console.WriteLine("[2]wating for a client: ");
-            Socket client = socket.Accept();
+            Socket client = sktServer.Accept();
             IPEndPoint ipEndPoint = (IPEndPoint)client.RemoteEndPoint;
             Console.WriteLine("[2]Connect with ip {0} at port {1}", ipEndPoint.Address, ipEndPoint.Port);
             
@@ -80,7 +80,7 @@ namespace TcpStudyCSharpServer
             }
             Console.Write("[-1]Disconnect form {0}", ipEndPoint.Address);
             client.Close();
-            socket.Close();
+            sktServer.Close();
         }
 
 
